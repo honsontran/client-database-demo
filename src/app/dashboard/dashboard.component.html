@@ -1,0 +1,68 @@
+<h1 class="display-3 text-center">Dashboard</h1>
+<p class="lead text-center">
+  What problems are we going to tackle today?
+</p>
+
+<div class="container">
+	<div class="row">	
+		<div class="col-9"><router-outlet></router-outlet></div>	
+		<div class="col" style="padding-top:25px;">
+			<div *ngIf="problemsArr | async; let problem">
+				<div *ngIf="problem.length > 0; else done">
+					<div class="card">
+						<h5 class="card-header"><p class="lead text-center">What's the sitch?</p></h5>
+						<div class="card-body">
+							<h5 class="card-title display-4 text-center">
+								{{ problem.length }}
+							</h5>
+							<p class="card-text text-center">Issue(s)</p>
+						</div>
+					</div>
+				</div>
+			
+				<ng-template #done>
+					<div class="card">
+						<h5 class="card-header"><p class="lead text-center">What's the sitch?</p></h5>
+
+						<div class="card-body">
+							<h5 class="card-title display-4 text-center">
+								Freedom at Last!
+							</h5>
+						</div>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Floating action button -->
+<!-- Propeller Button -->
+<link href="http://propeller.in/components/button/css/button.css" type="text/css" rel="stylesheet" />
+
+<!-- Propeller Accordion -->
+<link href="http://propeller.in/components/floating-action-button/css/floating-action-button.css" type="text/css" rel="stylesheet" /> 
+
+<style>
+	body { background:transparent;}
+</style>
+
+<div class="menu pmd-floating-action" role="navigation"> 
+	<a [routerLink]="['']" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="All Issues"> 
+		<span class="pmd-floating-hidden">All Issues</span>
+		<i class="fa fa-user"></i> 
+	</a> 
+	<a [routerLink]="['', 'monthly']" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Monthly Contacts"> 
+		<span class="pmd-floating-hidden">Monthly Contacts</span> 
+		<i class="fa fa-phone"></i>
+	</a>
+	<a [routerLink]="['', 'documents']" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Missing Documentation"> 
+			<span class="pmd-floating-hidden">Missing Documentation</span> 
+			<i class="fa fa-file"></i> 
+	</a> 
+	<a href="javascript:void(0);" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Categories"> 
+			<span class="pmd-floating-hidden">Primary</span>
+			<i class="fa fa-plus"></i> 
+		</a>
+</div>

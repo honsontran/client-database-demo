@@ -1,0 +1,40 @@
+<div class="col">
+	<div *ngFor="let client of problemsArr | async">
+    <br>
+    <div class="card">
+			<h5 class="card-header">{{client?.name}}</h5>
+			<div class="card-body">
+			<h5 class="card-title">Issue: {{ client?.issue }}</h5>
+			<p class="card-text">Details: {{client?.desc}}</p>
+			<!-- <p class="card-text">Key: {{client.$key}}</p> -->
+			
+			<div *ngIf="auth.user | async as user">
+				<div *ngIf="user.role == 'admin'">
+					<a href="#" class="btn btn-success" data-toggle="modal" data-target="#confirmResolve">Change to Resolved</a>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="confirmResolve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Are you sure you want to resolve this client?</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							</div>
+							<div class="modal-body">
+							Resolving the client will wipe the issue from the client. Only click "YES, RESOLVE!" if you have fully solved the issue at hand. If you didn't, you can always readd the issue for the client.
+							</div>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-danger" (click)="resolve(client)" data-dismiss="modal">YES, RESOLVE!</button>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>		
+</div>

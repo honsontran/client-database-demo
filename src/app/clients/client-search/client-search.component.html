@@ -1,0 +1,27 @@
+<h4>Looking for Someone?</h4>
+<input type="text" #searchInput (keyup)="search($event)" placeholder="search clients..." class="input text-center">
+
+<table class="table table-sm table-hover">
+  <br>
+  <h5>Results</h5>
+  <tr *ngFor="let client of clientsArr | async">
+      <td>{{client.name}}</td>
+      <td>
+        <a class="btn" (click)="clientsSvc.onEdit(client)">
+          <i class="fa fa-pencil-square-o"></i>
+        </a>
+        <a class="btn" (click)="clientsSvc.onDelete(client.$key)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </td>
+  </tr>
+</table>
+<br>
+<div *ngIf="(clientsArr | async)?.length < 1">
+  <hr>
+  <p>
+    No results found :(
+  </p>
+</div>
+
+

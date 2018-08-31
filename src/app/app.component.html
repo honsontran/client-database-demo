@@ -1,0 +1,94 @@
+<div *ngIf="auth.user | async; then authenticated else guest">
+    <!-- template will replace this div -->
+</div>
+  
+<!-- User NOT logged in -->
+<ng-template #guest>
+  <div class="container">    
+      <div class="container" style="width:40%;height:20%;margin-top:20%;margin-bottom:0%;">
+          <h1 class="text-center pulse animated display-4">Welcome to NLC Records</h1>
+      </div>
+
+      <div class="container pulse animated" style="width:40%;height:20%;">       
+        <div class="card" style="padding-bottom:15px; padding-top:15px">
+          
+          <p class="text-center lead">Login to get started...</p>
+          
+          <div class="text-center">
+            <button class="btn btn-danger" (click)="auth.googleLogin()">
+              <i class="fa fa-google"></i>Sign in with Google
+            </button>
+          </div>
+
+        </div>
+      </div>
+  </div>
+</ng-template>
+
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user | async as user">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" routerLink="">NLC Records</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" routerLink="">Home</a>
+            </li>
+      
+            <div *ngIf="auth.user | async as user">
+              <div *ngIf="user.role == 'admin' || user.role == ''">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="caseload">My Caseload</a>
+                </li>
+              </div>
+            </div>
+      
+            <div *ngIf="auth.user | async as user">
+              <div *ngIf="user.role == 'admin'">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="records">Records</a>
+                </li>
+              </div>
+            </div>
+          </ul>
+
+          <button class="btn btn-danger pull-right" (click)="auth.signOut()">Logout</button>
+          
+        </div>
+      </nav>
+        
+        
+        <!-- <div class="left">
+          <div class="item">
+            <span class="fa fa-envelope"></span>
+            Main Menu
+          </div>
+          <div class="item active">
+            <span class="fa fa-envelope"></span>
+              Resources</div>
+          <div class="item">
+            <span class="fa fa-envelope"></span>
+              Database</div>
+          <div class="item">
+            <span class="fa fa-envelope"></span>
+              Weekly Reports</div> 
+          <div class="item">
+            <span class="fa fa-envelope"></span>
+              Phone Log</div>
+          <div class="item">
+            <span class="fa fa-envelope"></span>
+              Log Out</div>    
+        </div> -->
+        
+        <div class="container">
+          <router-outlet></router-outlet>
+        </div>
+  </div>
+</ng-template>

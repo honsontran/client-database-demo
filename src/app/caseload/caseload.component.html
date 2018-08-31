@@ -1,0 +1,49 @@
+<!-- <div *ngIf="auth.user | async as user">
+  <div *ngIf="user.role == 'admin'">
+    <div ng-init="getName(user.displayName)"></div>
+    <p>HELLO {{ user.displayName }}</p>
+  </div>
+</div> -->
+
+<div class="row">
+    <div class="col-10">
+      <h1 class="display-4 text-left">My Caseload</h1>
+      <p class="lead text-left">
+        Add Users. Bookmark Issues. It all starts here.
+      </p>	
+    </div>
+  </div>
+  
+  
+  <div class="row">
+    <div class="col-md-7">
+      <app-client></app-client>
+    </div>
+    <div class="col-md-5">
+      <div class="col">
+        <div class="card">
+          <h5 class="card-title display-3 text-center">
+            {{ clientList?.length }}
+          </h5>
+          <p class="card-text text-center">Total Assigned Clients</p>
+          <!-- <button type="button" class="btn btn-success" (click)="toCSV()">Download CSV</button> -->
+        </div>
+      </div>
+        
+      <h6 class="text-center">Clients</h6><br/>
+      <table class="table table-sm table-hover">
+        <tr *ngFor="let client of clientList">
+            <td>{{client.name}}</td>
+            <td>{{client.position}}</td>
+            <td>
+              <a class="btn" (click)="onEdit(client)">
+                <i class="fa fa-pencil-square-o"></i>
+              </a>
+              <!-- <a class="btn" (click)="onDelete(client.$key)">
+                <i class="fa fa-trash-o"></i>
+              </a> -->
+            </td>
+        </tr>
+      </table>
+    </div>
+  </div>

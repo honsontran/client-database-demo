@@ -1,0 +1,125 @@
+<form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+    
+    <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="clientService.selectedClient.$key">
+
+  <div class="form-group">
+    <label>DDD ID</label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">
+          	<i class="fa fa-hashtag"></i>
+          </span>
+        </div>
+    	<input class="form-control" name="id" #id="ngModel" [(ngModel)]="clientService.selectedClient.id" placeholder="DDD ID">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Participant Name</label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">
+          	<i class="fa fa-user-circle"></i>
+          </span>
+        </div>
+	    <input class="form-control" name="name" #name="ngModel" [(ngModel)]="clientService.selectedClient.name" placeholder="Full Name" required>
+	  </div>
+  </div>
+
+  <!-- <div *ngIf="auth.user | async as user">
+    <div *ngIf="user.role == 'admin'"> -->
+      <div class="form-group">
+        <label for="SC">Support Coordinator</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fa fa-map-marker"></i>
+            </span>
+            <select class="form-control" id="SC"  #SC="ngModel" [(ngModel)]="clientService.selectedClient.SC" name="SC">
+              <option *ngFor="let SC of staffOptions" [value]="SC">{{ SC }}</option>
+            </select>
+          </div>
+      </div>
+      <!-- </div>
+    </div> -->
+
+
+  <div class="form-group">
+    <label for="county">County</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fa fa-map-marker"></i>
+        </span>
+        <select class="form-control" id="county"  #county="ngModel" [(ngModel)]="clientService.selectedClient.county" name="county">
+        <option *ngFor="let county of countyOptions" [value]="county">{{ county }}</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="program">Program</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fa fa-files-o"></i>
+        </span>
+        <select class="form-control" id="program"  #program="ngModel" [(ngModel)]="clientService.selectedClient.program" name="program">
+        <option *ngFor="let program of programOptions" [value]="program">{{ program }}</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="status">Status</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fa fa-eye"></i>
+        </span>
+        <select class="form-control" id="status"  #status="ngModel" [(ngModel)]="clientService.selectedClient.status" name="status">
+        <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="resolved">Any issues?</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fa fa-exclamation-circle"></i>
+        </span>
+        <select class="form-control" id="resolved"  #resolved="ngModel" [(ngModel)]="clientService.selectedClient.resolved" name="resolved">
+        <option *ngFor="let resolved of resolvedOptions" [value]="resolved">{{ resolved }}</option>
+        </select>
+      </div>
+  </div>
+
+  <!--   These input fields only appear if there are issues with the client. -->
+  <div *ngIf="clientService.selectedClient.resolved == 'Yes'">
+    
+    <div class="form-group">
+      <label for="issue">Issue Category:</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fa fa-certificate"></i>
+        </span>
+        <select class="form-control" id="issue"  #issue="ngModel" [(ngModel)]="clientService.selectedClient.issue" name="issue">
+          <option *ngFor="let issue of issueOptions" [value]="issue">{{ issue }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="desc">Details of Issue:</label>
+      <textarea class="form-control" id="desc"  #desc="ngModel" [(ngModel)]="clientService.selectedClient.desc" name="desc" rows="3"></textarea>
+    </div>
+
+  </div> <!-- end conditional input fields -->
+
+  <div class="form-group">
+    <button class="btn btn-default" type="submit" [disabled]="!clientForm.valid">
+      <i class="fa fa-floppy-o"></i>
+       Submit</button>
+    <button class="btn btn-default" type="button" (click)="resetForm(clientForm)">
+      <i class="fa fa-repeat"></i>
+       Reset</button>
+  </div>
+
+</form>

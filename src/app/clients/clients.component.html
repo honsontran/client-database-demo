@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-10">
+		<h1 class="display-4 text-left">Client DataBase</h1>
+		<p class="lead text-left">
+		  Create/Upload Clients. Bookmark Problems. It all starts here.
+		</p>	
+	</div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-7">
+    <app-client></app-client>
+  </div>
+  <div class="col-md-5">
+  	<div class="col">
+  		<div class="card">
+  			<h5 class="card-title display-3 text-center">
+  				{{ clientArr?.length }}
+  			</h5>
+				<p class="card-text text-center">Total Clients</p>
+				
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="CSVDrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Download Client List
+					</button>
+					<div class="dropdown-menu" aria-labelledby="CSVDrop">
+						<a class="dropdown-item" (click)="toCSV('all')">Download All</a>
+						<a class="dropdown-item" (click)="toCSV('Supports')">Download Supports Only</a>
+						<a class="dropdown-item" (click)="toCSV('CCP')">Download CCP Only</a>
+					</div>
+
+  		</div>
+  	</div>
+      <app-client-search></app-client-search>
+  </div>
+</div>
